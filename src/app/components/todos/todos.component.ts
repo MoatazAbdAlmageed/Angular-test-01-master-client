@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component , OnInit } from '@angular/core';
 import { ApiService } from '../../shared/api.service';
 import { Todo } from '../../shared/todo';
 
@@ -9,6 +9,12 @@ import { Todo } from '../../shared/todo';
 })
 export class TodosComponent implements OnInit {
     todos: Todo[] = [];
+     id = this.todos.length + 1 ;
+    newTodo: Todo = {
+        id: this.id,
+        date: new Date(),
+        completed: false,
+    } ;
     constructor(private api: ApiService) { }
 
     ngOnInit() {
@@ -16,5 +22,11 @@ export class TodosComponent implements OnInit {
             this.todos = data;
         });
   }
+
+    newElement() {
+        this.newTodo.todo = this.todoInput;
+        this.todos.push(this.newTodo);
+        this.todoInput = '';
+    }
 
 }
