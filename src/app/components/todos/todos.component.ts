@@ -15,14 +15,6 @@ export class TodosComponent implements OnInit {
         return this.api.getTodos().subscribe((data) => {
             this.todos = data;
         });
-
-        // this.api.getTodos()
-        //     .subscribe(res => {
-        //         console.log('moataz'  , res);
-        //         this.todos = res;
-        //     }, err => {
-        //         console.log(err);
-        //     });
   }
 
 }
