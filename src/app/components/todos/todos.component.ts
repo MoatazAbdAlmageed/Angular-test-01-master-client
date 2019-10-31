@@ -38,6 +38,7 @@ export class TodosComponent implements OnInit {
     };
     payload.todo = title;
     this.api.addTodo(payload).subscribe((data) => {
+      this.todoForm.reset();
       this.listTodos();
     }, (err) => {
       console.log(err);
