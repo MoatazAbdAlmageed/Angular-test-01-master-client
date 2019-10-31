@@ -1,11 +1,17 @@
-<div id="myDIV" class="header">
-    <h2 style="margin:5px">My To Do List</h2>
-    <input type="text" id="todo" [(ngModel)]="todoInput" placeholder="Title...">
-    <span (click)="newElement()" class="addBtn">Add</span>
+<div class="header" id="myDIV">
+  <h2 style="margin:5px">My To Do List</h2>
+  <form (ngSubmit)="addTodo()" [formGroup]="todoForm">
+    <div class="form-group">
+      <input class="form-control" formControlName="title" type="text"/>
+    </div>
+    <div class="form-group">
+      <button [disabled]="todoForm.invalid" class="btn btn-primary col-md-4 addBtn" type="submit">Add</button>
+    </div>
+  </form>
 </div>
 
 <ul id="myUL">
-    <li *ngFor="let todo of todos; let i = index;">
-        {{todo.todo}}
-    </li>
+  <li *ngFor="let todo of todos; let i = index;">
+    {{todo.todo}}
+  </li>
 </ul>

@@ -1,7 +1,7 @@
 export class Todo {
-    id?: number;
-    todo: string;
-    completed: boolean;
-    date: Date;
+  id?: number;
+  todo: string;
+  completed: boolean;
+  date: Date;
 
 }
