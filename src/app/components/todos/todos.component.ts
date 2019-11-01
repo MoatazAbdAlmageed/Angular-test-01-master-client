@@ -27,7 +27,7 @@ export class TodosComponent implements OnInit {
   ngOnInit() {
     this.todoForm = this.formBuilder.group({
       title: ['', Validators.compose([Validators.required])],
-      completed: ['', Validators.compose([Validators.required])],
+      completed: [],
     });
     this.listTodos();
   }
@@ -105,11 +105,11 @@ addTodo() {
      todo.todo = this.todoForm.controls.title.value;
      todo.completed = this.todoForm.controls.completed.value;
      this.updateTodo(todo);
+     this.todoForm.controls.title.setValue('');
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.todoForm.controls.title.setValue('');
     });
-   this.todoForm.controls.title.setValue('');
-    console.log('sss');
   }
 
   private getDismissReason(reason: any): string {

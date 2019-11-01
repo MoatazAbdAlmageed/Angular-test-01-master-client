@@ -19,18 +19,19 @@
     <i class="click fa fa-trash text-danger p-1" title="Delete" (click)="removeTodo(todo.id)"></i>
   </div>
   </li>
-
 </ul>
 
+
+
 <ng-template #updateTodoModal let-modal>
-  <form (ngSubmit)="updateTodo()" [formGroup]="todoForm">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Edit Todo</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
+  <form [formGroup]="todoForm">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Todo</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
       <div class="form-group">
         <label for="todoTitle">Title</label>
         <input id="todoTitle"  required class="form-control" formControlName="title" type="text"/>
@@ -44,9 +45,9 @@
         </bSwitch>
       </div>
 
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="(this.todoForm.controls.title.value !== '') && modal.close(this.todoForm.controls)">Update</button>
-  </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success" (click)="(this.todoForm.controls.title.value !== '') && modal.close(this.todoForm.controls)">Update</button>
+    </div>
   </form>
 </ng-template>

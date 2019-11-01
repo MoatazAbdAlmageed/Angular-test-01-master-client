@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 })
 export class ApiService {
 
-  apiUrl = 'http://localhost:5000/todoApp';
+  apiUrl = 'http://localhost:5000/todoApp'; // todo add in .env file
 
   constructor(private http: HttpClient) {
 
