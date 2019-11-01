@@ -11,13 +11,13 @@
 </div>
 <ul id="myUL">
   <li *ngFor="let todo of todos; let i = index;"  class="row">
-    <span class="todo col-8 click" (click)="updateTodoStatus(todo)">
+    <div class="todo col-8 click" (click)="updateTodoStatus(todo)">
       <i  class="radius" [class.badge-success]="todo.completed">   {{todo.todo}} </i>
-    </span>
-  <span class="col-4" >
+    </div>
+  <div class="col-4">
     <i class="click fa fa-edit text-primary p-1" title="Edit"(click)="open(updateTodoModal,todo)" ></i>
     <i class="click fa fa-trash text-danger p-1" title="Delete" (click)="removeTodo(todo.id)"></i>
-  </span>
+  </div>
   </li>
 
 </ul>

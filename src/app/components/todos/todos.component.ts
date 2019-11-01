@@ -3,6 +3,7 @@ import {ApiService} from '../../shared/api.service';
 import {Todo} from '../../shared/todo';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-todos',
@@ -77,13 +78,24 @@ addTodo() {
 
 
   removeTodo(id) {
-    if (confirm('Are you sure to delete this todo?')) {
-      this.api.deleteTodo(id).subscribe((todos) => {
-        this.todos = todos;
-      }, (err) => {
-        console.log(err);
+    // @ts-ignore
+    swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to delete this task?',
+      type: 'warning',
+      showConfirmButton: true,
+      showCancelButton: true
+    })
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.api.deleteTodo(id).subscribe((todos) => {
+            this.todos = todos;
+          }, (err) => {
+            console.log(err);
+          });
+        }
+        console.log(willDelete);
       });
-    }
   }
 
   /* Modal*/
