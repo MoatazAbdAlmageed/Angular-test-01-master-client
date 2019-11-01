@@ -9,9 +9,13 @@
     </div>
   </form>
 </div>
-
 <ul id="myUL">
-  <li *ngFor="let todo of todos; let i = index;">
-    {{todo.todo}}
+  <li *ngFor="let todo of todos; let i = index;"  class="row">
+    <span class="todo col-8 click" [class.badge-success]="todo.complete" (click)="updateTodo(todo,!todo.complete)">
+         {{todo.todo}}
+    </span>
+  <span class="click col-4" (click)="removeTodo(todo.id)"><i class="fa fa-trash"></i></span>
   </li>
+
 </ul>
+<p class="alert-success text-lg-center" *ngIf="!todos.length">Good job, You did all todos!</p>

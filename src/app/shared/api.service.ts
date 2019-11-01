@@ -30,20 +30,19 @@ export class ApiService {
     );
   }
 
-  updateTodo(id, todo): Observable<any> {
-    const url = `${this.apiUrl}/update.php?id=${id}`;
-    return this.http.put(url, todo).pipe(
-      tap(_ => console.log(`updated todo id=${id}`)),
+  updateTodo(todo): Observable<any> {
+    const url = `${this.apiUrl}/todo/`;
+    return this.http.patch(url, todo).pipe(
+      tap(_ => console.log(`updated todo id=${todo.id}`)),
       catchError(this.handleError<any>('updateTodo'))
     );
   }
 
-  deleteTodo(id): Observable<Todo> {
-    const url = `${this.apiUrl}/delete.php?id=${id}`;
-
-    return this.http.delete<Todo>(url).pipe(
+  deleteTodo(id): Observable<any> {
+    const url = `${this.apiUrl}/todo/${id}`;
+    return this.http.delete(url).pipe(
       tap(_ => console.log(`deleted todo id=${id}`)),
-      catchError(this.handleError<Todo>('deletetodo'))
+      catchError(this.handleError('deletetodo'))
     );
   }
 

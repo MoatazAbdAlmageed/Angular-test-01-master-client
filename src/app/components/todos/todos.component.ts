@@ -45,4 +45,25 @@ export class TodosComponent implements OnInit {
     });
   }
 
+
+  updateTodo(todo, b: boolean  = false ) {
+    todo.complete  = b;
+    this.api.updateTodo(todo).subscribe((data) => {
+      this.listTodos();
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+
+
+  removeTodo(id) {
+    if (confirm('Are you sure to delete this todo?')) {
+      this.api.deleteTodo(id).subscribe((data) => {
+        this.todos = data;
+    }, (err) => {
+      console.log(err);
+    });
+    }
+  }
 }
