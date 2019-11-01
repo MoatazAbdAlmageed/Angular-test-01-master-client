@@ -12,7 +12,6 @@ import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-b
 
 export class TodosComponent implements OnInit {
   todos: Todo[];
-  currentTodo: Todo;
   todoForm: FormGroup;
   modalOptions: NgbModalOptions;
   closeResult: string;
@@ -28,6 +27,7 @@ export class TodosComponent implements OnInit {
   ngOnInit() {
     this.todoForm = this.formBuilder.group({
       title: ['', Validators.compose([Validators.required])],
+      completed: ['', Validators.compose([Validators.required])],
     });
     this.listTodos();
   }
@@ -61,14 +61,16 @@ addTodo() {
   }
 
 
-  updateTodo(todo, b: boolean  = false ) {
-    console.log('updateTodo');
-    todo.complete  = b;
+  updateTodo(todo) {
     this.api.updateTodo(todo).subscribe((todos) => {
       this.todos = todos;
     }, (err) => {
       console.log(err);
     });
+  }
+  updateTodoStatus(todo) {
+    todo.completed = !todo.completed;
+    this.updateTodo(todo);
   }
 
 
@@ -86,17 +88,18 @@ addTodo() {
 
   /* Modal*/
   open(content, todo ) {
-    this.currentTodo = todo;
-    this.modalService.open(content, this.modalOptions).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-      todo.todo = result.title.value;
-      this.updateTodo(todo);
-
+   this.todoForm.controls.title.setValue(todo.todo);
+   this.todoForm.controls.completed.setValue(todo.completed);
+   this.modalService.open(content, this.modalOptions).result.then((result) => {
+     console.log(this.todoForm.controls.completed);
+     this.closeResult = `Closed with: ${result}`;
+     todo.todo = this.todoForm.controls.title.value;
+     todo.completed = this.todoForm.controls.completed.value;
+     this.updateTodo(todo);
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
 
-    console.log(this.closeResult);
   }
 
   private getDismissReason(reason: any): string {

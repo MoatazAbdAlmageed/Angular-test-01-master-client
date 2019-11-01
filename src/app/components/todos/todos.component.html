@@ -2,7 +2,7 @@
   <h2 style="margin:5px">My To Do List</h2>
   <form (ngSubmit)="addTodo()" [formGroup]="todoForm">
     <div class="form-group">
-      <input class="form-control" formControlName="title" type="text"/>
+      <input id="todo-title" class="form-control" formControlName="title" type="text"/>
     </div>
     <div class="form-group">
       <button [disabled]="todoForm.invalid" class="btn btn-primary col-md-4 addBtn" type="submit">Add</button>
@@ -11,8 +11,8 @@
 </div>
 <ul id="myUL">
   <li *ngFor="let todo of todos; let i = index;"  class="row">
-    <span class="todo col-8 click" (click)="updateTodo(todo,!todo.complete)">
-      <i  class="radius" [class.badge-success]="todo.complete">   {{todo.todo}} </i>
+    <span class="todo col-8 click" (click)="updateTodoStatus(todo)">
+      <i  class="radius" [class.badge-success]="todo.completed">   {{todo.todo}} </i>
     </span>
   <span class="col-4" >
     <i class="click fa fa-edit text-primary p-1" title="Edit"(click)="open(updateTodoModal,todo)" ></i>
@@ -26,22 +26,26 @@
 
 
 <ng-template #updateTodoModal let-modal>
+  <form (ngSubmit)="updateTodo()" [formGroup]="todoForm">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+    <h4 class="modal-title" id="modal-basic-title">Edit Todo</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="updateTodo(currentTodo)" [formGroup]="todoForm">
       <div class="form-group">
-        <input class="form-control" formControlName="title" value="{{currentTodo.todo}}" type="text"/>
+        <label for="todoTitle">Title</label>
+        <input id="todoTitle"  required class="form-control" formControlName="title" type="text"/>
       </div>
-      <div class="form-group">
+      <div class="form-check">
+        <input id="todoCheck" type="checkbox" formControlName="completed" class="form-check-input">
+        <label class="form-check-label" for="todoCheck">Check me out</label>
       </div>
-    </form>
+
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close(this.todoForm.controls)">Ok</button>
+    <button type="button" class="btn btn-outline-success" (click)="(this.todoForm.controls.title.value !== '') && modal.close(this.todoForm.controls)">Update</button>
   </div>
+  </form>
 </ng-template>
