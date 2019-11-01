@@ -65,6 +65,8 @@ addTodo() {
   updateTodo(todo) {
     this.api.updateTodo(todo).subscribe((todos) => {
       this.todos = todos;
+      const msg = todo.completed ? 'Good Job!' : 'Try to Work Hard!';
+      swal.fire(msg);
     }, (err) => {
       console.log(err);
     });
@@ -90,6 +92,7 @@ addTodo() {
         if (willDelete.value) {
           this.api.deleteTodo(id).subscribe((todos) => {
             this.todos = todos;
+            swal.fire('Deleted');
           }, (err) => {
             console.log(err);
           });
