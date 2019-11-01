@@ -10,7 +10,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 
 export class TodosComponent implements OnInit {
-  todos: Todo[] = [];
+  todos: Todo[];
   todoForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private api: ApiService) {
@@ -24,8 +24,8 @@ export class TodosComponent implements OnInit {
   }
 
   listTodos() {
-    return this.api.getTodos().subscribe((data) => {
-      this.todos = data;
+    return this.api.getTodos().subscribe((todos) => {
+      this.todos = todos;
     });
   }
 
@@ -37,9 +37,9 @@ export class TodosComponent implements OnInit {
       todo: title,
     };
     payload.todo = title;
-    this.api.addTodo(payload).subscribe((data) => {
+    this.api.addTodo(payload).subscribe((todos) => {
       this.todoForm.reset();
-      this.listTodos();
+      this.todos = todos;
     }, (err) => {
       console.log(err);
     });
@@ -48,8 +48,8 @@ export class TodosComponent implements OnInit {
 
   updateTodo(todo, b: boolean  = false ) {
     todo.complete  = b;
-    this.api.updateTodo(todo).subscribe((data) => {
-      this.listTodos();
+    this.api.updateTodo(todo).subscribe((todos) => {
+      this.todos = todos;
     }, (err) => {
       console.log(err);
     });
@@ -59,8 +59,8 @@ export class TodosComponent implements OnInit {
 
   removeTodo(id) {
     if (confirm('Are you sure to delete this todo?')) {
-      this.api.deleteTodo(id).subscribe((data) => {
-        this.todos = data;
+      this.api.deleteTodo(id).subscribe((todos) => {
+        this.todos = todos;
     }, (err) => {
       console.log(err);
     });
