@@ -4,6 +4,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {TodosComponent} from './components/todos/todos.component';
@@ -18,7 +20,8 @@ import {TodosComponent} from './components/todos/todos.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    JwBootstrapSwitchNg2Module
 
   ],
   providers: [],

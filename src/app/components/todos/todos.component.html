@@ -39,8 +39,12 @@
         <input id="todoTitle"  required class="form-control" formControlName="title" type="text"/>
       </div>
       <div class="form-check">
-        <input id="todoCheck" type="checkbox" formControlName="completed" class="form-check-input">
-        <label class="form-check-label" for="todoCheck">Check me out</label>
+        <bSwitch
+          [switch-off-text]="NotCompleted"
+          [switch-on-text]="Completed"
+          formControlName="completed"
+        >
+        </bSwitch>
       </div>
 
   </div>
