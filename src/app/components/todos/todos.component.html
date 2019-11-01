@@ -15,10 +15,32 @@
       <i  class="radius" [class.badge-success]="todo.complete">   {{todo.todo}} </i>
     </span>
   <span class="col-4" >
-    <i class="click fa fa-edit text-primary p-1" title="Edit" (click)="openEditModal(todo)"></i>
+    <i class="click fa fa-edit text-primary p-1" title="Edit"(click)="open(updateTodoModal,todo)" ></i>
     <i class="click fa fa-trash text-danger p-1" title="Delete" (click)="removeTodo(todo.id)"></i>
   </span>
   </li>
 
 </ul>
 <p class="alert-success text-lg-center" *ngIf="!todos.length">Good job, You did all todos!</p>
+
+
+<ng-template #updateTodoModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="updateTodo(currentTodo)" [formGroup]="todoForm">
+      <div class="form-group">
+        <input class="form-control" formControlName="title" value="{{currentTodo.todo}}" type="text"/>
+      </div>
+      <div class="form-group">
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close(this.todoForm.controls)">Ok</button>
+  </div>
+</ng-template>
