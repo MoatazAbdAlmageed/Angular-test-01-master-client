@@ -34,6 +34,8 @@ export class TodosComponent implements OnInit {
   listTodos() {
     return this.api.getTodos().subscribe((todos) => {
       this.todos = todos;
+    }, (err) => {
+      console.log(err);
     });
   }
 

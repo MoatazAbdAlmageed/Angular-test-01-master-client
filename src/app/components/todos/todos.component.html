@@ -21,7 +21,7 @@
   </li>
 
 </ul>
-<p class="alert-success text-lg-center" *ngIf="!todos.length">Good job, You did all todos!</p>
+<p class="alert-success text-lg-center" *ngIf="todos && !todos.length">Good job, You did all todos!</p>
 
 
 <ng-template #updateTodoModal let-modal>
