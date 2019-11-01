@@ -16,7 +16,6 @@ export class TodosComponent implements OnInit {
   todoForm: FormGroup;
   modalOptions: NgbModalOptions;
   closeResult: string;
-  connectionError: boolean;
 
   constructor(private formBuilder: FormBuilder, private api: ApiService, private modalService: NgbModal) {
     this.modalOptions = {
@@ -35,11 +34,6 @@ export class TodosComponent implements OnInit {
 
   listTodos() {
     return this.api.getTodos().subscribe((todos) => {
-      if (todos === 'error') {
-        this.connectionError = true;
-        return;
-      }
-      this.connectionError = false;
       this.todos = todos;
     });
   }
@@ -114,7 +108,8 @@ addTodo() {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-
+   this.todoForm.controls.title.setValue('');
+    console.log('sss');
   }
 
   private getDismissReason(reason: any): string {

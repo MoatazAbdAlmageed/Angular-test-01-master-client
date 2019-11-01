@@ -21,9 +21,6 @@
   </li>
 
 </ul>
-<p class="alert-success text-lg-center" *ngIf="todos && !todos.length && !connectionError">Good job, You did all todos!</p>
-<p class="alert-danger text-lg-center" *ngIf="connectionError">Check your connection</p>
-
 
 <ng-template #updateTodoModal let-modal>
   <form (ngSubmit)="updateTodo()" [formGroup]="todoForm">
