@@ -4,11 +4,14 @@
 
 
 ## the task:
-* create an angular application that consumes the apis in todoApps
-* allow user to add taks
-* update tasks
-* delete tasks
+- [x] create an angular application that consumes the apis in todoApps
+- [x] allow user to add taks
+- [x] update tasks
+- [x] delete tasks
 
 * note : do not concern yourself with styling or routes
 
 the html template is called todo.html
+
+## Demo
+https://www.loom.com/share/b28c7dcb120544888918e358ee0adec3
