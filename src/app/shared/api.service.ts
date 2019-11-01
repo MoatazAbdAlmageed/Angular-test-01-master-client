@@ -15,11 +15,11 @@ export class ApiService {
 
   }
 
-  getTodos(): Observable<Todo[]> {
+  getTodos(){
     return this.http.get<Todo[]>(`${this.apiUrl}/todos`)
       .pipe(
-        tap(heroes => console.log('fetched todos')),
-        catchError(this.handleError('getTodos', []))
+        tap(todos => console.log('fetched todos' , todos)),
+        catchError(this.handleError('getTodos', 'error'))
       );
   }
 
@@ -50,7 +50,8 @@ export class ApiService {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      console.log('handleError');
+      console.log(error); // log to console instead
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
